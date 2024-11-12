@@ -1,19 +1,26 @@
 <template>
-  <q-page class="row flex-center q-gutter-x-lg">
-    <q-table
-      title="Friends"
-      :rows="Object.values(friends)"
-      :columns
-    >
-      <template #top-right>
-        <q-btn
-          :icon="mdiPlus"
-          round
-          color="primary"
-          @click="showCreateUserDialog = true"
-        />
-      </template>
-    </q-table>
+  <q-page class="row q-col-gutter-lg">
+    <div class="col-xs-12 col-sm-8 col-md-8">
+      <h1 class="text-3xl font-bold">
+        Hello world!
+      </h1>
+
+      <q-table
+        :title="$t('friends.tableTitle')"
+        :rows="Object.values(friends)"
+        :columns
+        class="bg-brand"
+      >
+        <template #top-right>
+          <q-btn
+            :icon="mdiPlus"
+            round
+            color="primary"
+            @click="showCreateUserDialog = true"
+          />
+        </template>
+      </q-table>
+    </div>
 
     <CreateUserDialog
       v-model="showCreateUserDialog"
@@ -28,6 +35,9 @@ import { ref } from 'vue'
 import { useLocalStorage } from '@vueuse/core'
 import { mdiPlus } from '@quasar/extras/mdi-v7'
 import CreateUserDialog from 'src/components/CreateUserDialog.vue'
+import { Dialog, Loading, Notify } from 'quasar'
+
+// const local = ref('en-US')
 
 defineOptions({
   name: 'IndexPage'
@@ -79,10 +89,42 @@ const columns = [
 ]
 
 function createUser () {
-  console.log('form', form.value)
-  const id = Object.keys(friends.value).length + 1
-  friends.value[id] = { ...form.value, id: id.toString() }
-  showCreateUserDialog.value = false
+  Dialog.create({
+    title: 'Are you sure',
+    message: `is ${form.value.name} you friend`,
+    position: 'top',
+    ok: {
+      label: 'Yes',
+      color: 'positive'
+    },
+    cancel: {
+      label: 'No',
+      color: 'negative',
+      flat: true
+    }
+  }).onOk(() => {
+    Loading.show()
+
+    setTimeout(() => {
+      const id = Object.keys(friends.value).length + 1
+      friends.value[id] = { ...form.value, id: id.toString() }
+      showCreateUserDialog.value = false
+      Notify.create({
+        message: 'User created successfully',
+        color: 'positive',
+        position: 'top-right',
+        icon: mdiPlus
+      })
+      Loading.hide()
+    }, 1000)
+  }).onCancel(() => {
+    showCreateUserDialog.value = false
+  })
 }
 
 </script>
+<style lang="scss">
+.mobile .some-card{
+  background-color: grey;
+}
+</style>

@@ -45,8 +45,6 @@
               label="Operating System"
               filled
               :options="getOptions()"
-              lazy-rules
-              :rules="[val => !!val || 'Operating System is required', val => val?.value !== 'linux' || 'Linux is not supported']"
             />
           </q-card-section>
           <q-separator />
@@ -57,7 +55,6 @@
               label="Create"
               type="submit"
               flat
-              :disable="!isValid"
             />
           </q-card-actions>
         </q-card>
@@ -69,19 +66,13 @@
 
 <script setup lang="ts">
 import { QForm } from 'quasar'
-import { Ref, ref, watchEffect } from 'vue'
+import { Ref, ref } from 'vue'
 
 const form = defineModel('form', { type: Object })
 const emits = defineEmits(['create'])
 const formComponent: Ref<QForm | undefined> = ref()
 
 const isValid = ref(false)
-
-watchEffect(async () => {
-  if (formComponent.value === undefined) {
-    isValid.value = false
-  } else { isValid.value = await formComponent.value.validate() }
-})
 
 function getOptions () {
   return [

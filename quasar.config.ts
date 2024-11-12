@@ -15,13 +15,16 @@ export default configure((ctx) => {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
+      'wretch',
       'i18n',
       'axios'
+      // 'unocss'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: [
-      'app.scss'
+      'app.scss',
+      'tailwind.css'
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -34,7 +37,7 @@ export default configure((ctx) => {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      // 'roboto-font', // optional, you are not bound to it
+      'roboto-font' // optional, you are not bound to it
       // 'material-icons' // optional, you are not bound to it
     ],
 
@@ -88,7 +91,8 @@ export default configure((ctx) => {
           overlay: {
             initialOpen: false
           }
-        }, { server: false }]
+        }, { server: false }],
+        ['@unocss/vite', { }]
       ]
     },
 
@@ -113,7 +117,11 @@ export default configure((ctx) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify',
+        'Dialog',
+        'Loading'
+      ]
     },
 
     animations: 'all', // --- includes all animations

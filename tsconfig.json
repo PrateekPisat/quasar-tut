@@ -1,7 +1,10 @@
 {
   "extends": "@quasar/app-vite/tsconfig-preset",
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "moduleResolution": "Bundler", // "Node10", "Node16" or "NodeNext"
+    "strict": true // Optional, but
   },
   "exclude": [
     "./dist",
