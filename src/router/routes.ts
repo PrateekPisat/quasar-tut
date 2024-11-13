@@ -2,6 +2,13 @@ import { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
+    path: '/rampage',
+    component: () => import('layouts/RampageLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/RampagePage.vue'), name: 'rampage' }
+    ]
+  },
+  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [

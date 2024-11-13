@@ -16,6 +16,14 @@
         <q-toolbar-title>
           Quasar Tutorial
         </q-toolbar-title>
+
+        <q-btn
+          round
+          flat
+          :icon="mdiLogout"
+          :loading="store.loggingOut"
+          @click="store.logout()"
+        />
       </q-toolbar>
     </q-header>
 
@@ -53,10 +61,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { mdiMenu } from '@quasar/extras/mdi-v7'
+import { mdiMenu, mdiLogout } from '@quasar/extras/mdi-v7'
+import { useMcell } from 'src/stores/useMcell'
 
 const leftDrawerOpen = ref(false)
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+const store = useMcell()
 </script>

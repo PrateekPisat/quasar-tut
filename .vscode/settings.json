@@ -14,6 +14,9 @@
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "[vue]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "exceptionptr.vscode-prettier-eslint"
   }
 }

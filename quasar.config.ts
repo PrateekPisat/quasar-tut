@@ -17,8 +17,8 @@ export default configure((ctx) => {
     boot: [
       'wretch',
       'i18n',
-      'axios'
-      // 'unocss'
+      'axios',
+      'unocss'
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
@@ -92,7 +92,7 @@ export default configure((ctx) => {
             initialOpen: false
           }
         }, { server: false }],
-        ['@unocss/vite', { }]
+        ['@unocss/vite', {}]
       ]
     },
 
