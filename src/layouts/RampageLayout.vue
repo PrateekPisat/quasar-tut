@@ -5,9 +5,11 @@
         My App
         <q-space />
 
-        <q-btn flat size="small" :icon="mdiWindowMinimize">
-          asd
-        </q-btn>
+        <div class="q-gutter-x-sm">
+          <q-btn flat size="sm" :icon="mdiWindowMinimize" />
+          <q-btn flat size="sm" :icon="mdiWindowMaximize" />
+          <q-btn flat size="sm" :icon="mdiClose" />
+        </div>
       </q-bar>
     </q-header>
     <q-page-container>
@@ -15,8 +17,6 @@
     </q-page-container>
   </q-layout>
 </template>
-
 <script setup lang="ts">
-import { mdiWindowMinimize } from '@quasar/extras/mdi-v7'
-
+import { mdiClose, mdiWindowMaximize, mdiWindowMinimize } from '@quasar/extras/mdi-v7'
 </script>
